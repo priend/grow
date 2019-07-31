@@ -1,0 +1,106 @@
+package com.github.grow.context.log;
+
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
+
+import com.github.grow.fit.Platforms;
+import com.github.grow.util.StringUtils;
+
+/**
+ *
+ * @file Log4jUtil.java
+ * @dateTime 2017年7月25日 下午3:33:20
+ */
+public class ConfigLog4j {
+
+	private static final String LOG4J_PROPERITES = "log4j.properties";
+
+	/**
+	 * 
+	 */
+	public static void loadLogConfigurator(String path) {
+
+		if (StringUtils.isEmpty(path))
+		{
+			loadLogConfigurator();
+		}
+		else
+		{
+			PropertyConfigurator.configure(path);
+		}
+
+	}
+
+	/**
+	 * 
+	 */
+	public static void loadLogConfigurator() {
+
+		PropertyConfigurator.configure(Platforms.getClassPath().concat(LOG4J_PROPERITES));
+	}
+
+	/**
+	 * @param debug
+	 */
+	public static void debug(Object debug) {
+
+		StackTraceElement stack[] = (new Throwable()).getStackTrace();
+		Logger logger = Logger.getLogger(stack[1].getClassName());
+		logger.log(ConfigLog4j.class.getName(), Level.DEBUG, debug, null);
+	}
+
+	/**
+	 * @param info
+	 */
+	public static void info(Object info) {
+
+		StackTraceElement stack[] = (new Throwable()).getStackTrace();
+		Logger logger = Logger.getLogger(stack[1].getClassName());
+		logger.log(ConfigLog4j.class.getName(), Level.INFO, info, null);
+	}
+
+	/**
+	 * @param error
+	 */
+	public static void error(Object error) {
+
+		StackTraceElement stack[] = (new Throwable()).getStackTrace();
+		Logger logger = Logger.getLogger(stack[1].getClassName());
+		logger.log(ConfigLog4j.class.getName(), Level.ERROR, error, null);
+	}
+
+	/**
+	 * @param debug
+	 * @param throwable
+	 */
+	public static void debug(Object debug, Throwable throwable) {
+
+		StackTraceElement stack[] = (new Throwable()).getStackTrace();
+		Logger logger = Logger.getLogger(stack[1].getClassName());
+		logger.log(ConfigLog4j.class.getName(), Level.DEBUG, debug, throwable);
+	}
+
+	/**
+	 * @param info
+	 * @param throwable
+	 */
+	public static void info(Object info, Throwable throwable) {
+
+		StackTraceElement stack[] = (new Throwable()).getStackTrace();
+		Logger logger = Logger.getLogger(stack[1].getClassName());
+		logger.log(ConfigLog4j.class.getName(), Level.INFO, info, throwable);
+	}
+
+	/**
+	 * @param error
+	 * @param throwable
+	 */
+	public static void error(Object error, Throwable throwable) {
+
+		StackTraceElement stack[] = (new Throwable()).getStackTrace();
+		Logger logger = Logger.getLogger(stack[1].getClassName());
+		logger.log(ConfigLog4j.class.getName(), Level.ERROR, error, throwable);
+	}
+
+}
