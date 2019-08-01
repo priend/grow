@@ -6,43 +6,43 @@ public interface Store {
 
 	/**
 	 * 
-	 * @param elements
-	 * @return
+	 * @param elements 元素
+	 * @return 数组
 	 */
 	public Collection<Element> putAll(Collection<Element> elements);
 
 	/**
 	 * 获得缓存名字
 	 * 
-	 * @return
+	 * @return String
 	 */
 	public String getName();
 
 	/**
 	 * 存放
 	 * 
-	 * @param e
-	 * @return
+	 * @param e 元素
+	 * @return Element
 	 */
 	public Element put(Element e);
 
 	/**
 	 * 获取
 	 * 
-	 * @param key
-	 * @return
+	 * @param key 键
+	 * @return Element
 	 */
 	public Element get(Object key);
 
 	/**
 	 * 移除
 	 * 
-	 * @param key
+	 * @param key 键
 	 */
 	public void remove(Object key);
 
 	/**
-	 * @param keys
+	 * @param keys 键
 	 */
 	public void removeAll(Object[] keys);
 
@@ -54,7 +54,7 @@ public interface Store {
 	/**
 	 * 获得的元素
 	 * 
-	 * @return
+	 * @return Integer
 	 */
 	public Integer size();
 }

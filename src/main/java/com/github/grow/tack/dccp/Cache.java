@@ -3,8 +3,6 @@ package com.github.grow.tack.dccp;
 /**
  * 缓存 级的控制判断
  *
- * @file Cache.java
- * @dateTime 2017年7月19日 下午3:48:39
  */
 public class Cache extends MemoryCache {
 
@@ -21,7 +19,7 @@ public class Cache extends MemoryCache {
 	}
 
 	/**
-	 * @return
+	 * @return CacheConfiguration
 	 */
 	public CacheConfiguration getConfigure() {
 		return configure;

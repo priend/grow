@@ -2,9 +2,7 @@ package com.github.grow.skill.eff.consume;
 
 /**
  * 
- * @file Executor.java
  * @author ROCFLY ZHANGE PENGFEI
- * @dateTime 2014年7月16日 下午4:52:54
  */
 public interface Executor {
 
@@ -20,7 +18,7 @@ public interface Executor {
 
 	/**
 	 * 
-	 * @param task
+	 * @param command 线程
 	 */
 	public void execute(Runnable command);
 

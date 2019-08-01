@@ -6,8 +6,6 @@ import org.springframework.context.ApplicationContextAware;
 
 /**
  *
- * @file SpringContextHelper.java
- * @dateTime 2017年5月23日 上午11:35:03
  */
 public class SpringContextHelper implements ApplicationContextAware {
 
@@ -23,16 +21,18 @@ public class SpringContextHelper implements ApplicationContextAware {
 	}
 
 	/**
-	 * @param t
-	 * @return
+	 * @param <T> 类型
+	 * @param t   实体
+	 * @return T
 	 */
 	public static <T> T getBean(Class<T> t) {
 		return currentContext.get().getBean(t);
 	}
 
 	/**
-	 * @param beanName
-	 * @return
+	 * @param <T>      类型
+	 * @param beanName 类名
+	 * @return T
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T> T getBean(String beanName) {

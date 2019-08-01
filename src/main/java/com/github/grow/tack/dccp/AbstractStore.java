@@ -5,8 +5,6 @@ import java.util.Map;
 /**
  * 简单实现
  *
- * @file AbstractStore.java
- * @dateTime 2017年7月19日 下午3:55:39
  */
 public abstract class AbstractStore implements Store {
 

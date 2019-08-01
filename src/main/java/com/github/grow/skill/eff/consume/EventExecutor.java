@@ -9,9 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * 
- * @file PoolExecutor.java
  * @author ROCFLY ZHANGE PENGFEI
- * @dateTime 2014年7月17日 下午5:38:47
  */
 public class EventExecutor implements Executor {
 
@@ -27,7 +25,8 @@ public class EventExecutor implements Executor {
 
 	@Override
 	public void start() {
-		executor = new ThreadPoolExecutor(minPoolSize, maximumPoolSize, keepAliveTime, unit, workQueue, Executors.defaultThreadFactory(), handler);
+		executor = new ThreadPoolExecutor(minPoolSize, maximumPoolSize, keepAliveTime, unit, workQueue,
+				Executors.defaultThreadFactory(), handler);
 	}
 
 	@Override

@@ -8,8 +8,6 @@ import com.github.grow.util.io.FileType;
 /**
  * 变量
  *
- * @file Platforms.java
- * @dateTime 2017年5月23日 上午11:16:53
  */
 public class Platforms {
 
@@ -64,28 +62,26 @@ public class Platforms {
 	 * 获得当前进程的PID
 	 * 
 	 * 当失败时返回-1
+	 * 
+	 * @return int
 	 */
 	public static int getPid() {
 		// format: "pid@hostname"
 		String name = ManagementFactory.getRuntimeMXBean().getName();
 		String[] split = name.split("@");
-		if (split.length != 2)
-		{
+		if (split.length != 2) {
 			return -1;
 		}
 
-		try
-		{
+		try {
 			return Integer.parseInt(split[0]);
-		}
-		catch (Exception e)
-		{
+		} catch (Exception e) {
 			return -1;
 		}
 	}
 
 	/**
-	 * @return
+	 * @return String
 	 */
 	public static String currentWorkPath() {
 
@@ -93,7 +89,7 @@ public class Platforms {
 	}
 
 	/**
-	 * @return
+	 * @return String
 	 */
 	public static String getClassPath() {
 		return ClassLoader.getSystemResource("").getPath();
@@ -102,27 +98,22 @@ public class Platforms {
 	/**
 	 * 获得上层目录的路径
 	 * 
-	 * @param path
-	 * @return
+	 * @param path 路径
+	 * @return String
 	 */
 	public static String getParentClassPath(String path) {
 		String parentPath = path;
 
-		if (Platforms.CLASS_PATH_SEPARATOR.equals(parentPath))
-		{
+		if (Platforms.CLASS_PATH_SEPARATOR.equals(parentPath)) {
 			return parentPath;
 		}
-		if (parentPath.endsWith(Platforms.CLASS_PATH_SEPARATOR))
-		{
+		if (parentPath.endsWith(Platforms.CLASS_PATH_SEPARATOR)) {
 			parentPath = parentPath.substring(0, parentPath.length() - 1);
 		}
 		int idx = parentPath.lastIndexOf(Platforms.CLASS_PATH_SEPARATOR_CHAR);
-		if (idx >= 0)
-		{
+		if (idx >= 0) {
 			parentPath = parentPath.substring(0, idx + 1);
-		}
-		else
-		{
+		} else {
 			parentPath = Platforms.CLASS_PATH_SEPARATOR;
 		}
 

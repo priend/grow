@@ -16,8 +16,6 @@ import org.slf4j.LoggerFactory;
 /**
  * 加载Properties文件
  * 
- * @file PropertiesUtil.java
- * @dateTime 2017年7月19日 上午11:40:28
  */
 public class PropertiesLoader {
 
@@ -26,8 +24,8 @@ public class PropertiesLoader {
 	/**
 	 * 使用java.util.Properties类的load(InputStream in)方法加载
 	 * 
-	 * @param namePath
-	 * @return
+	 * @param basePath 路径
+	 * @return Properties
 	 */
 	public static Properties fromFile(String basePath) {
 
@@ -43,11 +41,9 @@ public class PropertiesLoader {
 	}
 
 	/**
-	 * 使用java.util.ResourceBundle类的getBundle()方法 <br/>
-	 * 例如com/util
 	 * 
-	 * @param baseName
-	 * @return
+	 * @param baseName 对象名称
+	 * @return ResourceBundle
 	 */
 	public static ResourceBundle fromResourceBundle(String baseName) {
 
@@ -57,8 +53,8 @@ public class PropertiesLoader {
 	/**
 	 * 使用java.util.PropertyResourceBundle类的构造函数
 	 * 
-	 * @param basePath
-	 * @return
+	 * @param basePath 路径
+	 * @return ResourceBundle
 	 */
 	public static ResourceBundle fromResourceBundlePath(String basePath) {
 
@@ -74,11 +70,9 @@ public class PropertiesLoader {
 	}
 
 	/**
-	 * 使用java.lang.ClassLoader类的getSystemResourceAsStream()静态方法 <br/>
-	 * 例如com/util
 	 * 
-	 * @param baseName
-	 * @return
+	 * @param baseName 对象名称
+	 * @return Properties
 	 */
 	public static Properties fromSystemResourceAsStream(String baseName) {
 
@@ -96,8 +90,8 @@ public class PropertiesLoader {
 	/**
 	 * 从字符串内容加载Properties
 	 * 
-	 * @param content
-	 * @return
+	 * @param content 字符串实体
+	 * @return Properties
 	 */
 	public static Properties fromString(String content) {
 

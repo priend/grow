@@ -2,9 +2,7 @@ package com.github.grow.skill.eff.consume;
 
 /**
  * 
- * @file EventExecute.java
  * @author ROCFLY ZHANGE PENGFEI
- * @dateTime 2014年7月16日 下午4:11:03
  */
 public interface Generant {
 
@@ -47,8 +45,7 @@ public interface Generant {
 	/**
 	 * 方法说明：线程活动时间 (ms)
 	 * 
-	 * @param frequencyMillis
-	 *            时间
+	 * @param frequencyMillis 时间
 	 */
 	public void setFrequencyMillis(Long frequencyMillis);
 }

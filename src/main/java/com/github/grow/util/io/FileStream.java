@@ -24,8 +24,6 @@ import org.slf4j.LoggerFactory;
 import com.github.grow.fit.Platforms;
 
 /**
- * @file FileUtil.java
- * @dateTime 2017年7月26日 下午5:24:00
  */
 public class FileStream {
 
@@ -34,20 +32,16 @@ public class FileStream {
 	/**
 	 * 创建目录
 	 * 
-	 * @param dir
+	 * @param dir 目录
 	 */
 	public static void mkdir(String dir) {
-		try
-		{
+		try {
 			String dirTemp = dir;
 			File dirPath = new File(dirTemp);
-			if (!dirPath.exists())
-			{
+			if (!dirPath.exists()) {
 				dirPath.mkdir();
 			}
-		}
-		catch (Exception e)
-		{
+		} catch (Exception e) {
 			log.error("创建目录操作出错: " + e.getMessage(), e);
 		}
 	}
@@ -55,17 +49,15 @@ public class FileStream {
 	/**
 	 * 新建文件
 	 * 
-	 * @param filePathName
-	 * @param content
+	 * @param filePathName 文件名称
+	 * @param content      内容
 	 * 
 	 */
 	public static void createNewFile(String filePathName, String content) {
 
-		try
-		{
+		try {
 			File filePath = new File(filePathName);
-			if (!filePath.exists())
-			{
+			if (!filePath.exists()) {
 				filePath.createNewFile();
 			}
 			FileWriter fileWriter = new FileWriter(filePath);
@@ -74,9 +66,7 @@ public class FileStream {
 			printWriter.flush();
 			printWriter.close();
 			fileWriter.close();
-		}
-		catch (Exception e)
-		{
+		} catch (Exception e) {
 			log.error("新建文件操作出错: " + e.getMessage(), e);
 		}
 
@@ -85,16 +75,13 @@ public class FileStream {
 	/**
 	 * 删除文件
 	 * 
-	 * @param filePathName
+	 * @param filePathName 文件名称
 	 */
 	public static void delFile(String filePathName) {
 
-		try
-		{
+		try {
 			new File(filePathName).delete();
-		}
-		catch (Exception e)
-		{
+		} catch (Exception e) {
 			log.error("删除文件操作出错: " + e.getMessage(), e);
 		}
 	}
@@ -102,16 +89,13 @@ public class FileStream {
 	/**
 	 * 删除文件夹
 	 * 
-	 * @param folderPath
+	 * @param folderPath 路径
 	 */
 	public static void delFolder(String folderPath) {
-		try
-		{
+		try {
 			delAllFile(folderPath);
 			new File(folderPath).delete();
-		}
-		catch (Exception e)
-		{
+		} catch (Exception e) {
 			log.error("删除文件夹操作出错" + e.getMessage(), e);
 		}
 	}
@@ -119,39 +103,30 @@ public class FileStream {
 	/**
 	 * 删除文件夹里面的所有文件
 	 * 
-	 * @param path
-	 *            文件夹路径
+	 * @param path 文件夹路径
 	 */
 	public static void delAllFile(String path) {
 
 		File file = new File(path);
-		if (!file.exists())
-		{
+		if (!file.exists()) {
 			return;
 		}
-		if (!file.isDirectory())
-		{
+		if (!file.isDirectory()) {
 			return;
 		}
 		String[] childFiles = file.list();
 		File temp = null;
 
-		for (int i = 0; i < childFiles.length; i++)
-		{
-			if (path.endsWith(File.separator))
-			{
+		for (int i = 0; i < childFiles.length; i++) {
+			if (path.endsWith(File.separator)) {
 				temp = new File(path + childFiles[i]);
-			}
-			else
-			{
+			} else {
 				temp = new File(path + File.separator + childFiles[i]);
 			}
-			if (temp.isFile())
-			{
+			if (temp.isFile()) {
 				temp.delete();
 			}
-			if (temp.isDirectory())
-			{
+			if (temp.isDirectory()) {
 				delAllFile(path + File.separator + childFiles[i]);
 				delFolder(path + File.separator + childFiles[i]);
 			}
@@ -161,15 +136,11 @@ public class FileStream {
 	/**
 	 * 复制单个文件
 	 * 
-	 * @param srcFile
-	 *            包含路径的源文件 如：../abc.txt
-	 * @param dirDest
-	 *            目标文件目录；若文件目录不存在则自动创建 如：../dest
-	 * @throws IOException
+	 * @param srcFile 包含路径的源文件 如：../abc.txt
+	 * @param dirDest 目标文件目录；若文件目录不存在则自动创建 如：../dest
 	 */
 	public static void copyFile(String srcFile, String dirDest) {
-		try
-		{
+		try {
 			mkdir(dirDest);
 
 			FileInputStream in = new FileInputStream(srcFile);
@@ -177,16 +148,13 @@ public class FileStream {
 
 			int len;
 			byte buffer[] = new byte[1024];
-			while ((len = in.read(buffer)) != -1)
-			{
+			while ((len = in.read(buffer)) != -1) {
 				out.write(buffer, 0, len);
 			}
 			out.flush();
 			out.close();
 			in.close();
-		}
-		catch (Exception e)
-		{
+		} catch (Exception e) {
 			log.error("复制文件操作出错:" + e.getMessage(), e);
 		}
 	}
@@ -194,51 +162,38 @@ public class FileStream {
 	/**
 	 * 复制文件夹
 	 * 
-	 * @param oldPath
-	 *            String 源文件夹路径 如：../src
-	 * @param newPath
-	 *            String 目标文件夹路径 如：..p/dest
-	 * @return boolean
+	 * @param oldPath String 源文件夹路径 如：../src
+	 * @param newPath String 目标文件夹路径 如：..p/dest
 	 */
 	public static void copyFolder(String oldPath, String newPath) {
-		try
-		{
+		try {
 			mkdir(newPath);
 			File file = new File(oldPath);
 			String[] files = file.list();
 			File temp = null;
-			for (int i = 0; i < files.length; i++)
-			{
-				if (oldPath.endsWith(File.separator))
-				{
+			for (int i = 0; i < files.length; i++) {
+				if (oldPath.endsWith(File.separator)) {
 					temp = new File(oldPath + files[i]);
-				}
-				else
-				{
+				} else {
 					temp = new File(oldPath + File.separator + files[i]);
 				}
-				if (temp.isFile())
-				{
+				if (temp.isFile()) {
 					FileInputStream input = new FileInputStream(temp);
 					FileOutputStream output = new FileOutputStream(newPath + "/" + (temp.getName()).toString());
 					byte[] buffer = new byte[1024 * 2];
 					int len;
-					while ((len = input.read(buffer)) != -1)
-					{
+					while ((len = input.read(buffer)) != -1) {
 						output.write(buffer, 0, len);
 					}
 					output.flush();
 					output.close();
 					input.close();
 				}
-				if (temp.isDirectory())
-				{
+				if (temp.isDirectory()) {
 					copyFolder(oldPath + File.separator + files[i], newPath + File.separator + files[i]);
 				}
 			}
-		}
-		catch (Exception e)
-		{
+		} catch (Exception e) {
 			log.error("复制文件夹操作出错:" + e.getMessage(), e);
 		}
 	}
@@ -246,10 +201,8 @@ public class FileStream {
 	/**
 	 * 移动文件到指定目录
 	 * 
-	 * @param oldPath
-	 *            包含路径的文件名 如：../ljq.txt
-	 * @param newPath
-	 *            目标文件目录 如：../dest
+	 * @param oldPath 包含路径的文件名 如：../ljq.txt
+	 * @param newPath 目标文件目录 如：../dest
 	 */
 	public static void moveFile(String oldPath, String newPath) {
 		copyFile(oldPath, newPath);
@@ -259,10 +212,8 @@ public class FileStream {
 	/**
 	 * 移动文件到指定目录，不会删除文件夹
 	 * 
-	 * @param oldPath
-	 *            源文件目录 如：E:/phsftp/src
-	 * @param newPath
-	 *            目标文件目录 如：E:/phsftp/dest
+	 * @param oldPath 源文件目录 如：E:/phsftp/src
+	 * @param newPath 目标文件目录 如：E:/phsftp/dest
 	 */
 	public static void moveFiles(String oldPath, String newPath) {
 		copyFolder(oldPath, newPath);
@@ -272,10 +223,8 @@ public class FileStream {
 	/**
 	 * 移动文件到指定目录，会删除文件夹
 	 * 
-	 * @param oldPath
-	 *            源文件目录 如：E:/phsftp/src
-	 * @param newPath
-	 *            目标文件目录 如：E:/phsftp/dest
+	 * @param oldPath 源文件目录 如：E:/phsftp/src
+	 * @param newPath 目标文件目录 如：E:/phsftp/dest
 	 */
 	public static void moveFolder(String oldPath, String newPath) {
 		copyFolder(oldPath, newPath);
@@ -285,11 +234,9 @@ public class FileStream {
 	/**
 	 * 压缩文件
 	 * 
-	 * @param srcDir
-	 *            压缩前存放的目录
-	 * @param destDir
-	 *            压缩后存放的目录
-	 * @throws Exception
+	 * @param srcDir  压缩前存放的目录
+	 * @param destDir 压缩后存放的目录
+	 * @throws Exception 异常
 	 */
 	public static void yaSuoZip(String srcDir, String destDir) throws Exception {
 
@@ -297,20 +244,14 @@ public class FileStream {
 		int len;
 		byte[] buf = new byte[1024 * 2];
 		File[] files = new File(srcDir).listFiles();
-		if (files != null)
-		{
-			for (File file : files)
-			{
-				if (file.isFile())
-				{
+		if (files != null) {
+			for (File file : files) {
+				if (file.isFile()) {
 					FileInputStream fis = new FileInputStream(file);
 					BufferedInputStream bis = new BufferedInputStream(fis);
-					if (destDir.endsWith(File.separator))
-					{
+					if (destDir.endsWith(File.separator)) {
 						tempFileName = destDir + file.getName() + ".zip";
-					}
-					else
-					{
+					} else {
 						tempFileName = destDir + File.separator + file.getName() + ".zip";
 					}
 					FileOutputStream fos = new FileOutputStream(tempFileName);
@@ -320,8 +261,7 @@ public class FileStream {
 					ZipEntry ze = new ZipEntry(file.getName());
 					zos.putNextEntry(ze);
 
-					while ((len = bis.read(buf)) != -1)
-					{
+					while ((len = bis.read(buf)) != -1) {
 						zos.write(buf, 0, len);
 						zos.flush();
 					}
@@ -335,18 +275,17 @@ public class FileStream {
 	/**
 	 * 读取数据
 	 * 
-	 * @param inSream
-	 * @param charsetName
-	 * @return
-	 * @throws Exception
+	 * @param inSream     输入流
+	 * @param charsetName 编码
+	 * @return String
+	 * @throws Exception 处理异常
 	 */
 	public static String readData(InputStream inSream, String charsetName) throws Exception {
 
 		ByteArrayOutputStream outStream = new ByteArrayOutputStream();
 		byte[] buffer = new byte[1024];
 		int len = -1;
-		while ((len = inSream.read(buffer)) != -1)
-		{
+		while ((len = inSream.read(buffer)) != -1) {
 			outStream.write(buffer, 0, len);
 		}
 		byte[] data = outStream.toByteArray();
@@ -359,17 +298,16 @@ public class FileStream {
 	/**
 	 * 一行一行读取文件，适合字符读取，若读取中文字符时会出现乱码
 	 * 
-	 * @param path
-	 * @return
-	 * @throws Exception
+	 * @param path 文件路径
+	 * @return set
+	 * @throws Exception 处理异常
 	 */
 	public static Set<String> readFile(String path) throws Exception {
 		Set<String> datas = new HashSet<String>();
 		FileReader fr = new FileReader(path);
 		BufferedReader br = new BufferedReader(fr);
 		String line = null;
-		while ((line = br.readLine()) != null)
-		{
+		while ((line = br.readLine()) != null) {
 			datas.add(line);
 		}
 		br.close();
@@ -379,6 +317,10 @@ public class FileStream {
 
 	/**
 	 * 打开文件为InputStream
+	 * 
+	 * @param file 文件
+	 * @return InputStream
+	 * @throws IOException IO 异常
 	 */
 	public static InputStream asInputStream(File file) throws IOException {
 		return new FileInputStream(file);
@@ -386,6 +328,10 @@ public class FileStream {
 
 	/**
 	 * 打开文件为OutputStream
+	 * 
+	 * @param file 文件
+	 * @return OutputStream
+	 * @throws IOException IO 异常
 	 */
 	public static OutputStream asOututStream(File file) throws IOException {
 		return new FileOutputStream(file);
@@ -393,10 +339,12 @@ public class FileStream {
 
 	/**
 	 * 判断目录是否存在, from Jodd
+	 * 
+	 * @param dir 目录
+	 * @return boolean
 	 */
 	public static boolean isDirExists(File dir) {
-		if (dir == null)
-		{
+		if (dir == null) {
 			return false;
 		}
 		return dir.exists() && dir.isDirectory();
@@ -404,27 +352,28 @@ public class FileStream {
 
 	/**
 	 * 确保目录存在, 如不存在则创建
+	 * 
+	 * @param file 文件
+	 * @throws IOException IO 异常
 	 */
 	public static void makesureDirExists(File file) throws IOException {
-		if (file.exists())
-		{
-			if (!file.isDirectory())
-			{
+		if (file.exists()) {
+			if (!file.isDirectory()) {
 				throw new IOException("There is a file exists " + file);
 			}
-		}
-		else
-		{
+		} else {
 			file.mkdirs();
 		}
 	}
 
 	/**
 	 * 判断文件是否存在, from Jodd
+	 * 
+	 * @param file 文件
+	 * @return boolean
 	 */
 	public static boolean isFileExists(File file) {
-		if (file == null)
-		{
+		if (file == null) {
 			return false;
 		}
 		return file.exists() && file.isFile();
@@ -432,6 +381,9 @@ public class FileStream {
 
 	/**
 	 * 在临时目录创建临时文件，命名为tmp-${random.nextLong()}.tmp
+	 * 
+	 * @return File
+	 * @throws IOException IO 异常
 	 */
 	public static File createTempFile() throws IOException {
 		return File.createTempFile("tmp-", ".tmp");
@@ -439,6 +391,11 @@ public class FileStream {
 
 	/**
 	 * 在临时目录创建临时文件，命名为${prefix}${random.nextLong()}${suffix}
+	 * 
+	 * @param prefix 前缀
+	 * @param suffix 后缀
+	 * @return File
+	 * @throws IOException IO 异常
 	 */
 	public static File createTempFile(String prefix, String suffix) throws IOException {
 		return File.createTempFile(prefix, suffix);
@@ -446,6 +403,9 @@ public class FileStream {
 
 	/**
 	 * 获取文件名(不包含路径)
+	 * 
+	 * @param fullName 文件全名称
+	 * @return String
 	 */
 	public static String getFileName(String fullName) {
 		int last = fullName.lastIndexOf(Platforms.FILE_PATH_SEPARATOR_CHAR);

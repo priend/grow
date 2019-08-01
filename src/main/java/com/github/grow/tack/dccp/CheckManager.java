@@ -6,8 +6,6 @@ import java.util.Map;
 /**
  * 检查的的一些方式
  *
- * @file CheckManager.java
- * @dateTime 2017年7月19日 下午3:57:49
  */
 public class CheckManager {
 
@@ -15,8 +13,8 @@ public class CheckManager {
 	protected Map<Object, Element> map;
 
 	/**
-	 * @param configure
-	 * @param map
+	 * @param configure 缓存配置
+	 * @param map       存储
 	 */
 	public CheckManager(CacheConfiguration configure, Map<Object, Element> map) {
 		this.map = map;
@@ -26,8 +24,8 @@ public class CheckManager {
 	/**
 	 * 添加检查元素是否已经到达最大值，或者已经过期
 	 * 
-	 * @param elementSize
-	 * @return
+	 * @param elementSize 添加元素最大值
+	 * @return Object[]
 	 */
 	public Object[] checkConfigure(int elementSize) {
 		int removeSize = map.size() + elementSize - configure.getMaxElementsInMemory();
@@ -44,8 +42,8 @@ public class CheckManager {
 	/**
 	 * 根据方式移除
 	 * 
-	 * @param removeSize
-	 * @return
+	 * @param removeSize 异常元素大小
+	 * @return Object[]
 	 */
 	public Object[] removeElementByEvictionType(int removeSize) {
 		if (configure.getMemoryStoreEvictionPolicy().equals(EvictionType.LRU.name())) {
@@ -57,8 +55,8 @@ public class CheckManager {
 	/**
 	 * 暂时默认根据最少使用次数进行删除
 	 * 
-	 * @param removeSize
-	 * @return
+	 * @param removeSize 最少使用次数 进行删除
+	 * @return Object[]
 	 */
 	private Object[] removeElementByLRU(int removeSize) {
 		Object keys[] = new Object[removeSize];
@@ -85,9 +83,9 @@ public class CheckManager {
 	}
 
 	/**
-	 * @param hits
-	 * @param hit
-	 * @return
+	 * @param hits 数组
+	 * @param hit  插入顺序
+	 * @return long
 	 */
 	private long getMinIndex(long hits[], long hit) {
 		long pos = -1;
@@ -95,7 +93,6 @@ public class CheckManager {
 			if (hits[i] > hit) {
 				hits[i] = hit;
 				pos = i;
-				;
 			}
 		}
 		return pos;

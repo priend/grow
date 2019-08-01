@@ -7,9 +7,7 @@ import com.github.grow.util.StringUtils;
 
 /**
  *
- * @file Envariables.java
  * @author CMCC.HPE.Pactera.Zh
- * @dateTime 2018年4月23日 下午4:52:05
  */
 public class Envariables {
 
@@ -21,7 +19,7 @@ public class Envariables {
 	}
 
 	/**
-	 * @return
+	 * @return Envariables
 	 */
 	public static Envariables getInstance() {
 
@@ -29,13 +27,12 @@ public class Envariables {
 	}
 
 	/**
-	 * @param key
-	 * @param value
+	 * @param key   键
+	 * @param value 值
 	 */
 	public void setSystemProperty(String key, String value) {
 
-		if (StringUtils.isEmpty(ENVAS_MAP.get(key)))
-		{
+		if (StringUtils.isEmpty(ENVAS_MAP.get(key))) {
 			ENVAS_MAP.put(key, value);
 		}
 		{
@@ -44,17 +41,14 @@ public class Envariables {
 	}
 
 	/**
-	 * @param key
-	 * @return
+	 * @param key 键
+	 * @return String
 	 */
 	public String getUserSystemProperty(String key) {
 
-		if (StringUtils.isEmpty(ENVAS_MAP.get(key)))
-		{
+		if (StringUtils.isEmpty(ENVAS_MAP.get(key))) {
 			return null;
-		}
-		else
-		{
+		} else {
 			return ENVAS_MAP.get(key);
 		}
 	}

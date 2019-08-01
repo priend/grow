@@ -4,17 +4,15 @@ import java.io.File;
 
 /**
  *
- * @file FileTypeUtil.java
  * @author CMCC.HPE.Pactera.Zh
- * @dateTime 2018年4月12日 下午3:35:58
  */
 public class FileType {
 
 	public static final String PATH_SEPARATOR = File.separator;
 
 	/**
-	 * @param path
-	 * @return
+	 * @param path 路径
+	 * @return boolean
 	 */
 	public static boolean isFile(String path) {
 
@@ -23,27 +21,24 @@ public class FileType {
 	}
 
 	/**
-	 * @param path
-	 * @return
+	 * @param path 路径
+	 * @return File
 	 */
 	public static File visibleFile(String path) {
 
 		File f = new File(path);
 
-		if (f.exists())
-		{
+		if (f.exists()) {
 			return f;
-		}
-		else
-		{
+		} else {
 			return null;
 		}
 	}
 
 	/**
-	 * @param path
-	 * @param fileName
-	 * @return
+	 * @param path     路径
+	 * @param fileName 文件名称
+	 * @return String
 	 */
 	public static String fileNamePath(String path, String fileName) {
 

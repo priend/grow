@@ -9,24 +9,19 @@ import com.github.grow.util.StringUtils;
 
 /**
  *
- * @file Log4jUtil.java
- * @dateTime 2017年7月25日 下午3:33:20
  */
 public class ConfigLog4j {
 
 	private static final String LOG4J_PROPERITES = "log4j.properties";
 
 	/**
-	 * 
+	 * @param path 路径
 	 */
 	public static void loadLogConfigurator(String path) {
 
-		if (StringUtils.isEmpty(path))
-		{
+		if (StringUtils.isEmpty(path)) {
 			loadLogConfigurator();
-		}
-		else
-		{
+		} else {
 			PropertyConfigurator.configure(path);
 		}
 
@@ -41,7 +36,7 @@ public class ConfigLog4j {
 	}
 
 	/**
-	 * @param debug
+	 * @param debug 对象
 	 */
 	public static void debug(Object debug) {
 
@@ -51,7 +46,7 @@ public class ConfigLog4j {
 	}
 
 	/**
-	 * @param info
+	 * @param info 对象
 	 */
 	public static void info(Object info) {
 
@@ -61,7 +56,7 @@ public class ConfigLog4j {
 	}
 
 	/**
-	 * @param error
+	 * @param error 对象
 	 */
 	public static void error(Object error) {
 
@@ -71,8 +66,8 @@ public class ConfigLog4j {
 	}
 
 	/**
-	 * @param debug
-	 * @param throwable
+	 * @param debug     对象
+	 * @param throwable 异常对象
 	 */
 	public static void debug(Object debug, Throwable throwable) {
 
@@ -82,8 +77,8 @@ public class ConfigLog4j {
 	}
 
 	/**
-	 * @param info
-	 * @param throwable
+	 * @param info      对象
+	 * @param throwable 异常对象
 	 */
 	public static void info(Object info, Throwable throwable) {
 
@@ -93,8 +88,8 @@ public class ConfigLog4j {
 	}
 
 	/**
-	 * @param error
-	 * @param throwable
+	 * @param error     对象
+	 * @param throwable 异常对象
 	 */
 	public static void error(Object error, Throwable throwable) {
 

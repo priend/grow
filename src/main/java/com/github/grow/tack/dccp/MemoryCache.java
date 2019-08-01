@@ -7,8 +7,6 @@ import java.util.Map;
 /**
  * 缓存的基本方法
  *
- * @file MemoryCache.java
- * @dateTime 2017年7月19日 下午3:49:27
  */
 public class MemoryCache extends AbstractStore implements Store {
 
@@ -19,7 +17,7 @@ public class MemoryCache extends AbstractStore implements Store {
 	/**
 	 * 暂时仅弄一个构造
 	 * 
-	 * @param configure
+	 * @param configure 缓存配置
 	 */
 	public MemoryCache(CacheConfiguration configure) {
 		super(map);
@@ -51,10 +49,9 @@ public class MemoryCache extends AbstractStore implements Store {
 	}
 
 	/**
-	 * 使用一次之后刷新使用过期时间，以及使用次数 <br/>
-	 * 并检查该元素是否过期
+	 * 使用一次之后刷新使用过期时间，以及使用次数, 并检查该元素是否过期
 	 * 
-	 * @param e
+	 * @param e 元素
 	 */
 	public void changeElement(Element e) {
 		e.addHitCount();
@@ -66,7 +63,7 @@ public class MemoryCache extends AbstractStore implements Store {
 	/**
 	 * 如果eternal 为true，表示元素永不过期,默认忽略最小元素控制
 	 * 
-	 * @param e
+	 * @param e 元素
 	 */
 	public void putElementStatus(Element e) {
 		if (!configure.getEternal() && !e.getIsOpen()) {
@@ -97,8 +94,8 @@ public class MemoryCache extends AbstractStore implements Store {
 	/**
 	 * 检查元素 是否为空
 	 * 
-	 * @param e
-	 * @return
+	 * @param e 元素
+	 * @return boolean
 	 */
 	public boolean checkElement(Element e) {
 		if (e == null) {
@@ -118,7 +115,7 @@ public class MemoryCache extends AbstractStore implements Store {
 	/**
 	 * 检查元素是否超过了
 	 * 
-	 * @param checkSize
+	 * @param checkSize 检查元素大小
 	 */
 	public void check(int checkSize) {
 		if (checkSize <= 0) {

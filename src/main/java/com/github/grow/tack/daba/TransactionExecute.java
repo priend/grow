@@ -4,8 +4,6 @@ import java.sql.SQLException;
 
 /**
  *
- * @file ExecuteTransaction.java
- * @dateTime 2017年8月1日 下午4:31:47
  */
 public class TransactionExecute {
 
@@ -17,7 +15,7 @@ public class TransactionExecute {
 	private ConnectionDispersed connectionDispersed = ConnectionDispersed.getInstance();
 
 	/**
-	 * @throws Exception
+	 * @throws SQLException 数据库异常
 	 */
 	public void open() throws SQLException {
 
@@ -27,22 +25,21 @@ public class TransactionExecute {
 	/**
 	 * 开启事务
 	 * 
-	 * @param level
-	 * @throws SQLException
+	 * @param level 事务等级
+	 * @throws SQLException 数据库异常
 	 */
 	public void open(Integer level) throws SQLException {
 
 		this.open();
 
-		if (null != level)
-		{
+		if (null != level) {
 			this.connectionDispersed.getConn().setTransactionIsolation(level);
 		}
 	}
 
 	/**
 	 * 
-	 * @throws SQLException
+	 * @throws SQLException 数据库异常
 	 */
 	public void commit() throws SQLException {
 
@@ -51,7 +48,7 @@ public class TransactionExecute {
 
 	/**
 	 * 
-	 * @throws SQLException
+	 * @throws SQLException 数据库异常
 	 */
 	public void rollback() throws SQLException {
 
@@ -59,7 +56,7 @@ public class TransactionExecute {
 	}
 
 	/**
-	 * @throws SQLException
+	 * @throws SQLException 数据库异常
 	 */
 	public void close() throws SQLException {
 

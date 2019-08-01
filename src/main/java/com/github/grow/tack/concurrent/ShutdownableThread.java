@@ -14,13 +14,16 @@ public abstract class ShutdownableThread extends Thread {
 	private CountDownLatch shutdownLatch = new CountDownLatch(1);
 
 	/**
-	 * An UncaughtExceptionHandler to register on every instance of this class.
-	 * This is useful for testing, where AssertionExceptions in the thread may
-	 * not cause the test to fail. Since one instance is used for all threads,
-	 * it must be thread-safe.
+	 * An UncaughtExceptionHandler to register on every instance of this class. This
+	 * is useful for testing, where AssertionExceptions in the thread may not cause
+	 * the test to fail. Since one instance is used for all threads, it must be
+	 * thread-safe.
 	 */
 	volatile public static UncaughtExceptionHandler funcaughtExceptionHandler = null;
 
+	/**
+	 * @param name name
+	 */
 	public ShutdownableThread(String name) {
 		// The default is daemon=true so that these threads will not prevent
 		// shutdown. We use this
@@ -30,6 +33,10 @@ public abstract class ShutdownableThread extends Thread {
 		this(name, true);
 	}
 
+	/**
+	 * @param name   name
+	 * @param daemon daemon
+	 */
 	public ShutdownableThread(String name, boolean daemon) {
 		super(name);
 		this.setDaemon(daemon);
@@ -44,8 +51,10 @@ public abstract class ShutdownableThread extends Thread {
 	public abstract void execute();
 
 	/**
-	 * Returns true if the thread hasn't exited yet and none of the shutdown
-	 * methods have been invoked
+	 * Returns true if the thread hasn't exited yet and none of the shutdown methods
+	 * have been invoked
+	 * 
+	 * @return boolean
 	 */
 	public boolean getRunning() {
 		return isRunning.get();
@@ -64,13 +73,12 @@ public abstract class ShutdownableThread extends Thread {
 	}
 
 	/**
-	 * Shutdown the thread, first trying to shut down gracefully using the
-	 * specified timeout, then forcibly interrupting the thread.
+	 * Shutdown the thread, first trying to shut down gracefully using the specified
+	 * timeout, then forcibly interrupting the thread.
 	 * 
-	 * @param gracefulTimeout
-	 *            the maximum time to wait for a graceful exit
-	 * @param unit
-	 *            the time unit of the timeout argument
+	 * @param gracefulTimeout the maximum time to wait for a graceful exit
+	 * @param unit            the time unit of the timeout argument
+	 * @throws InterruptedException Interrupted Exception
 	 */
 	public void shutdown(long gracefulTimeout, TimeUnit unit) throws InterruptedException {
 		boolean success = gracefulShutdown(gracefulTimeout, unit);
@@ -81,11 +89,10 @@ public abstract class ShutdownableThread extends Thread {
 	/**
 	 * Attempt graceful shutdown
 	 * 
-	 * @param timeout
-	 *            the maximum time to wait
-	 * @param unit
-	 *            the time unit of the timeout argument
+	 * @param timeout the maximum time to wait
+	 * @param unit    the time unit of the timeout argument
 	 * @return true if successful, false if the timeout elapsed
+	 * @throws InterruptedException Interrupted Exception
 	 */
 	public boolean gracefulShutdown(long timeout, TimeUnit unit) throws InterruptedException {
 		startGracefulShutdown();
@@ -93,8 +100,8 @@ public abstract class ShutdownableThread extends Thread {
 	}
 
 	/**
-	 * Start shutting down this thread gracefully, but do not block waiting for
-	 * it to exit.
+	 * Start shutting down this thread gracefully, but do not block waiting for it
+	 * to exit.
 	 */
 	public void startGracefulShutdown() {
 		log.info("Starting graceful shutdown of thread {}", getName());
@@ -104,22 +111,22 @@ public abstract class ShutdownableThread extends Thread {
 	/**
 	 * Awaits shutdown of this thread, waiting up to the timeout.
 	 * 
-	 * @param timeout
-	 *            the maximum time to wait
-	 * @param unit
-	 *            the time unit of the timeout argument
+	 * @param timeout the maximum time to wait
+	 * @param unit    the time unit of the timeout argument
 	 * @return true if successful, false if the timeout elapsed
-	 * @throws InterruptedException
+	 * @throws InterruptedException Interrupted Exception
 	 */
 	public boolean awaitShutdown(long timeout, TimeUnit unit) throws InterruptedException {
 		return shutdownLatch.await(timeout, unit);
 	}
 
 	/**
-	 * Immediately tries to force the thread to shut down by interrupting it.
-	 * This does not try to wait for the thread to truly exit because forcible
-	 * shutdown is not always possible. By default, threads are marked as daemon
-	 * threads so they will not prevent the process from exiting.
+	 * Immediately tries to force the thread to shut down by interrupting it. This
+	 * does not try to wait for the thread to truly exit because forcible shutdown
+	 * is not always possible. By default, threads are marked as daemon threads so
+	 * they will not prevent the process from exiting.
+	 * 
+	 * @throws InterruptedException Interrupted Exception
 	 */
 	public void forceShutdown() throws InterruptedException {
 		log.info("Forcing shutdown of thread {}", getName());

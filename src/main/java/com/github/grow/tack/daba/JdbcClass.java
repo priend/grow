@@ -9,9 +9,7 @@ import java.util.Map;
 /**
  * 处理对象的
  *
- * @file JdbcClass.java
  * @author rocfly.zhang
- * @dateTime 2017年7月24日 上午10:17:27
  */
 public class JdbcClass {
 
@@ -20,8 +18,7 @@ public class JdbcClass {
 	// private static final String SETTER_PREFIX = "set";
 	private static final String GETTER_PREFIX = "get";
 
-	private JdbcClass()
-	{
+	private JdbcClass() {
 	}
 
 	public static JdbcClass getInstance() {
@@ -30,8 +27,9 @@ public class JdbcClass {
 	}
 
 	/**
-	 * @param t
-	 * @throws Exception
+	 * @param <T> 类型
+	 * @param t   实体
+	 * @throws Exception 异常
 	 */
 	public <T> void save(T t) throws Exception {
 
@@ -40,10 +38,8 @@ public class JdbcClass {
 		StringBuffer sbValues = new StringBuffer();
 		List<Object> params = new ArrayList<Object>();
 
-		for (Map.Entry<String, Object> entry : this.fieldNameValue(t).entrySet())
-		{
-			if (sbFiled.indexOf(",") > -1)
-			{
+		for (Map.Entry<String, Object> entry : this.fieldNameValue(t).entrySet()) {
+			if (sbFiled.indexOf(",") > -1) {
 				sbFiled.append(",");
 				sbValues.append(",");
 			}
@@ -58,41 +54,37 @@ public class JdbcClass {
 	}
 
 	/**
-	 * @param t
-	 * @return
+	 * @param <T> 泛化
+	 * @param t   实体
+	 * @return Map
 	 * @throws Exception
 	 */
 	private <T> Map<String, Object> fieldNameValue(T t) throws Exception {
 
 		Map<String, Object> map = new HashMap<String, Object>();
 
-		for (Method method : t.getClass().getMethods())
-		{
-			if (method.getName().startsWith(GETTER_PREFIX))
-			{
-				map.put(stringAddUnderline(method.getName().toLowerCase().replaceFirst(GETTER_PREFIX, "")), method.invoke(t));
+		for (Method method : t.getClass().getMethods()) {
+			if (method.getName().startsWith(GETTER_PREFIX)) {
+				map.put(stringAddUnderline(method.getName().toLowerCase().replaceFirst(GETTER_PREFIX, "")),
+						method.invoke(t));
 			}
 		}
 		return map;
 	}
 
 	/**
-	 * @param str
-	 * @return
+	 * @param str 字符串
+	 * @return String
 	 */
 	private String stringAddUnderline(String str) {
 
 		StringBuffer temStr = new StringBuffer();
 
-		for (int i = 0; i < str.length(); i++)
-		{
+		for (int i = 0; i < str.length(); i++) {
 			char ch = str.charAt(i);
-			if (i != 0 && Character.isUpperCase(ch))
-			{
+			if (i != 0 && Character.isUpperCase(ch)) {
 				temStr.append("_").append(ch);
-			}
-			else
-			{
+			} else {
 				temStr.append(ch);
 			}
 		}
@@ -100,8 +92,8 @@ public class JdbcClass {
 	}
 
 	/**
-	 * @param clazz
-	 * @return
+	 * @param clazz 类性
+	 * @return String
 	 */
 	private String getObjectToTableName(Class<?> clazz) {
 		return stringAddUnderline(clazz.getSimpleName());

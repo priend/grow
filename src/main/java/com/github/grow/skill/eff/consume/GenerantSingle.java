@@ -2,9 +2,7 @@ package com.github.grow.skill.eff.consume;
 
 /**
  * 
- * @file GenerantEvent.java
  * @author ROCFLY ZHANGE PENGFEI
- * @dateTime 2014年7月16日 下午4:45:27
  */
 public class GenerantSingle implements Generant {
 
@@ -13,18 +11,16 @@ public class GenerantSingle implements Generant {
 	private Executor executor;
 	private EventContext context;
 
-	public GenerantSingle()
-	{
+	public GenerantSingle() {
 		super();
 	}
 
 	/**
 	 * 
-	 * @param executor
-	 * @param context
+	 * @param executor 线程池
+	 * @param context  上下文事件
 	 */
-	public GenerantSingle(Executor executor, EventContext context)
-	{
+	public GenerantSingle(Executor executor, EventContext context) {
 		this();
 		this.context = context;
 		this.executor = executor;
@@ -55,7 +51,6 @@ public class GenerantSingle implements Generant {
 	 * 
 	 * 方法说明：设置暂停
 	 * 
-	 * @param interrupted
 	 */
 	public void suspend() {
 		interrupted = true;
@@ -83,7 +78,6 @@ public class GenerantSingle implements Generant {
 	 * 方法说明：执行任务
 	 * 
 	 * @return Boolean
-	 * @throws Exception
 	 * 
 	 */
 	public Boolean handleTask() {
@@ -101,16 +95,11 @@ public class GenerantSingle implements Generant {
 	 * @return
 	 */
 	private Boolean handleTask(EventTask<Boolean> eventTask) {
-		try
-		{
+		try {
 			return eventTask.doInContext(context);
-		}
-		catch (Exception e)
-		{
+		} catch (Exception e) {
 			// logger.error("", ex);
-		}
-		finally
-		{
+		} finally {
 			releaseContext(context);
 		}
 		return true;
@@ -120,14 +109,10 @@ public class GenerantSingle implements Generant {
 	 * @param ctx
 	 */
 	private void releaseContext(EventContext ctx) {
-		if (ctx != null)
-		{
-			try
-			{
+		if (ctx != null) {
+			try {
 				// ctx.close();
-			}
-			catch (Exception ex)
-			{
+			} catch (Exception ex) {
 				// logger.error("", ex);
 			}
 		}
@@ -142,8 +127,7 @@ public class GenerantSingle implements Generant {
 	private Thread threadTask() {
 		return new Thread(new Runnable() {
 			public void run() {
-				while (!interrupted)
-				{
+				while (!interrupted) {
 					GenerantSingle.this.executor.execute(new RunnableTask());
 				}
 			}
@@ -163,19 +147,15 @@ public class GenerantSingle implements Generant {
 		 * 
 		 */
 		public void run() {
-			try
-			{
-				do
-				{
+			try {
+				do {
 					isTask = handleTask();
 					Thread.sleep(frequencyMillis);
 				} while (isTask);
 				{
 					disclose();
 				}
-			}
-			catch (InterruptedException e)
-			{
+			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
@@ -190,7 +170,7 @@ public class GenerantSingle implements Generant {
 
 	/**
 	 * 
-	 * @param executor
+	 * @param executor 放入线程池
 	 */
 	public void setExecutor(Executor executor) {
 		this.executor = executor;
@@ -198,7 +178,7 @@ public class GenerantSingle implements Generant {
 
 	/**
 	 * 
-	 * @param context
+	 * @param context 执行事件
 	 */
 	public void setContext(EventContext context) {
 		this.context = context;

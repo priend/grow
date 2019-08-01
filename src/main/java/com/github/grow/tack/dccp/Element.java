@@ -5,8 +5,6 @@ import java.io.Serializable;
 /**
  * 缓存元素，所对应的属性
  *
- * @file Element.java
- * @dateTime 2017年7月19日 下午4:07:29
  */
 @SuppressWarnings("serial")
 public class Element implements Serializable {
@@ -51,7 +49,7 @@ public class Element implements Serializable {
 	/**
 	 * 判断元素 是否过期
 	 * 
-	 * @return
+	 * @return boolean
 	 */
 	public boolean isExpired() {
 		if (isEternal()) {
@@ -66,7 +64,7 @@ public class Element implements Serializable {
 	/**
 	 * 是否是不会过期
 	 * 
-	 * @return
+	 * @return boolean
 	 */
 	public boolean isEternal() {
 		return (0 == timeToIdle) && (0 == timeToLive);
@@ -75,7 +73,7 @@ public class Element implements Serializable {
 	/**
 	 * 计算过期时间
 	 * 
-	 * @return
+	 * @return long
 	 */
 	public long getExpirationTime() {
 		if (isEternal()) {

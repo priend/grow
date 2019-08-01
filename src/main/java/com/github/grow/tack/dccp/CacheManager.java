@@ -7,8 +7,6 @@ import java.util.Map;
  *
  * 缓存核心类
  * 
- * @file CacheManager.java
- * @dateTime 2017年7月19日 下午3:33:34
  */
 public class CacheManager {
 	/**
@@ -22,7 +20,7 @@ public class CacheManager {
 	}
 
 	/**
-	 * @return
+	 * @return CacheManager
 	 */
 	public static CacheManager getInstance() {
 		return Singleton.instance;
@@ -33,8 +31,8 @@ public class CacheManager {
 	/**
 	 * 存放 取出 缓存对象
 	 * 
-	 * @param CacheName
-	 * @return
+	 * @param CacheName 缓存名称
+	 * @return Cache
 	 */
 	public Cache getCache(String CacheName) {
 		Cache cache = MAP_NAMES_CACHE.get(CacheName);
@@ -42,7 +40,7 @@ public class CacheManager {
 	}
 
 	/**
-	 * @param cache
+	 * @param cache 缓存
 	 */
 	public void putCache(Cache cache) {
 		if (cache != null && !MAP_NAMES_CACHE.containsKey(cache.getName())) {
@@ -53,7 +51,7 @@ public class CacheManager {
 	/**
 	 * 移除
 	 * 
-	 * @param cacheName
+	 * @param cacheName 缓存名称
 	 */
 	public void remove(String cacheName) {
 		Cache c = MAP_NAMES_CACHE.remove(cacheName);
@@ -81,7 +79,7 @@ public class CacheManager {
 	/**
 	 * 获得名字
 	 * 
-	 * @return
+	 * @return String[]
 	 */
 	public String[] getCacheNames() {
 		return MAP_NAMES_CACHE.keySet().toArray(new String[0]);

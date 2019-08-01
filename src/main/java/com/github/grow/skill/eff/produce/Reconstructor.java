@@ -10,9 +10,6 @@ import com.github.grow.skill.eff.consume.GenerantSingle;
 
 /**
  * 
- * @file Reconstructor.java
- * @author ROCFLY ZHANGE PENGFEI
- * @dateTime 2014年7月16日 下午3:37:56
  */
 public class Reconstructor {
 
@@ -22,31 +19,30 @@ public class Reconstructor {
 	/**
 	 * 
 	 */
-	private Reconstructor()
-	{
+	private Reconstructor() {
 		resources = new ConcurrentLinkedQueue<Resource<?>>();
 	}
 
 	/**
-	 * @return
+	 * @return Reconstructor
 	 */
 	public static Reconstructor getInstance() {
-		if (null == instance)
-		{
+		if (null == instance) {
 			instance = new Reconstructor().worker();
 		}
 		return instance;
 	}
 
 	/**
-	 * @param resource
+	 * @param <T>      实体
+	 * @param resource 实体类
 	 */
 	public <T extends Resource<T>> void cleanResource(T resource) {
 		resources.add(resource);
 	}
 
 	/**
-	 * @return
+	 * @return Reconstructor
 	 */
 	private Reconstructor worker() {
 		new GenerantSingle(new EventExecutor(), new Reconstructor.EventTask()).run();
@@ -55,16 +51,13 @@ public class Reconstructor {
 
 	/**
 	 * 
-	 * @file Reconstructor.java
 	 * @author ROCFLY ZHANGE PENGFEI
-	 * @dateTime 2014年7月17日 下午6:19:56
 	 */
 	private class EventTask implements EventContext {
 
 		@Override
 		public Boolean task() {
-			if (resources.size() >= 1)
-			{
+			if (resources.size() >= 1) {
 				resources.poll().detach();
 				return true;
 			}

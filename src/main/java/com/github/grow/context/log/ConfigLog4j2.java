@@ -12,8 +12,6 @@ import org.apache.logging.log4j.core.config.Configurator;
 /**
  * LOG4J2
  *
- * @file Log4j2Util.java
- * @dateTime 2017年7月25日 下午4:15:37
  */
 public class ConfigLog4j2 {
 
@@ -23,43 +21,34 @@ public class ConfigLog4j2 {
 	 * 
 	 */
 	public static void loadLogConfigurator() {
-		try
-		{
+		try {
 			Configurator.initialize(null, new ConfigurationSource(new FileInputStream(new File(DEFAULT_LOG4J_2_PAHT))));
-		}
-		catch (IOException e)
-		{
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
 	/**
-	 * @param url
+	 * @param url 加载URL
 	 */
 	public static void loadLogConfigurator(URL url) {
 
-		try
-		{
+		try {
 			Configurator.initialize(null, new ConfigurationSource(new FileInputStream(new File(url.getPath())), url));
-		}
-		catch (FileNotFoundException e)
-		{
+		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
 
 	/**
-	 * @param path
+	 * @param path 加载路径
 	 */
 	public static void loadLogConfigurator(String path) {
 
-		try
-		{
+		try {
 			File file = new File(path);
 			Configurator.initialize(null, new ConfigurationSource(new FileInputStream(file), file));
-		}
-		catch (FileNotFoundException e)
-		{
+		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 	}

@@ -8,9 +8,7 @@ import com.github.grow.tack.daba.JdbcDynamic;
 /**
  * 数据源
  *
- * @file DBContextHolder.java
  * @author rocfly.zhang
- * @dateTime 2017年7月25日 下午2:54:43
  */
 public class DBContextHolder {
 
@@ -53,7 +51,7 @@ public class DBContextHolder {
 	}
 
 	/**
-	 * @param type
+	 * @param type 类型
 	 */
 	public static void setDBType(String type) {
 		JdbcDynamic.getInstance().initDataSource(type);

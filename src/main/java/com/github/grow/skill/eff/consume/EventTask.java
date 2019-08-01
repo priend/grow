@@ -2,17 +2,14 @@ package com.github.grow.skill.eff.consume;
 
 /**
  * 
- * @file EventTask.java
  * @author ROCFLY ZHANGE PENGFEI
- * @dateTime 2014年7月16日 下午5:58:09
- * @param <T>
  */
 public interface EventTask<T> {
 
 	/**
-	 * @param ctx
-	 * @return
-	 * @throws Exception
+	 * @param ctx 上下文事件
+	 * @return T
+	 * @throws Exception 处理异常
 	 */
 	T doInContext(EventContext ctx) throws Exception;
 }

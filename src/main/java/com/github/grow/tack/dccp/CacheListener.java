@@ -8,8 +8,6 @@ import java.util.Map.Entry;
 /**
  * 循环检查元素
  *
- * @file CacheListener.java
- * @dateTime 2017年7月19日 下午3:34:53
  */
 public class CacheListener extends Thread {
 

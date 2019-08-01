@@ -2,9 +2,7 @@ package com.github.grow.tack.daba;
 
 /**
  *
- * @file ETC.java
  * @author rocfly.zhang
- * @dateTime 2017年10月30日 下午5:49:17
  */
 public abstract class ETC implements ExecuteCall {
 

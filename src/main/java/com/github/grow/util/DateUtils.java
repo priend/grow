@@ -11,9 +11,9 @@ public class DateUtils {
 	/**
 	 * yyyyMMdd
 	 * 
-	 * @param dateStr
-	 * @return
-	 * @throws ConsumerLogException
+	 * @param dateStr 时间字符串
+	 * @return Date
+	 * @throws Exception 转换异常
 	 */
 	public static Date parseDate(String dateStr) throws Exception {
 
@@ -23,9 +23,9 @@ public class DateUtils {
 	/**
 	 * yyyyMMdd
 	 * 
-	 * @param date
-	 * @return
-	 * @throws Exception
+	 * @param date 时间
+	 * @return String
+	 * @throws Exception 转换异常
 	 */
 	public static String valueDate(Date date) throws Exception {
 
@@ -35,9 +35,8 @@ public class DateUtils {
 	/**
 	 * yyyyMMddHHmmss
 	 * 
-	 * @param dateStr
-	 * @return
-	 * @throws Exception
+	 * @return String
+	 * @throws Exception 转换异常
 	 */
 	public static String currentDateTime() throws Exception {
 
@@ -47,9 +46,9 @@ public class DateUtils {
 	/**
 	 * yyyyMMddHHmmss
 	 * 
-	 * @param dateStr
-	 * @return
-	 * @throws Exception
+	 * @param dateStr 时间字符串
+	 * @return Date
+	 * @throws Exception 转换异常
 	 */
 	public static Date parseDateTime(String dateStr) throws Exception {
 
@@ -59,9 +58,9 @@ public class DateUtils {
 	/**
 	 * yyyyMMddHHmmss
 	 * 
-	 * @param date
-	 * @return
-	 * @throws Exception
+	 * @param date 时间
+	 * @return Date
+	 * @throws Exception 转换异常
 	 */
 	public static String valueDateTime(Date date) throws Exception {
 
@@ -71,9 +70,9 @@ public class DateUtils {
 	/**
 	 * yyyy-MM-dd
 	 * 
-	 * @param dateStr
-	 * @return
-	 * @throws ConsumerLogException
+	 * @param dateStr 时间字符串
+	 * @return Date
+	 * @throws Exception 转换异常
 	 */
 	public static Date parseBarDate(String dateStr) throws Exception {
 
@@ -83,9 +82,9 @@ public class DateUtils {
 	/**
 	 * yyyy-MM-dd
 	 * 
-	 * @param date
-	 * @return
-	 * @throws Exception
+	 * @param date 时间
+	 * @return Date
+	 * @throws Exception 转换异常
 	 */
 	public static String valueBarDate(Date date) throws Exception {
 
@@ -95,9 +94,9 @@ public class DateUtils {
 	/**
 	 * yyyy-MM-dd HH:mm:ss
 	 * 
-	 * @param dateStr
-	 * @return
-	 * @throws ConsumerLogException
+	 * @param dateStr 时间字符串
+	 * @return Date
+	 * @throws Exception 转换异常
 	 */
 	public static Date parseBarDateTime(String dateStr) throws Exception {
 
@@ -107,9 +106,9 @@ public class DateUtils {
 	/**
 	 * yyyy-MM-dd HH:mm:ss
 	 * 
-	 * @param date
-	 * @return
-	 * @throws Exception
+	 * @param date 时间
+	 * @return Date
+	 * @throws Exception 转换异常
 	 */
 	public static String valueBarDateTime(Date date) throws Exception {
 
@@ -119,20 +118,21 @@ public class DateUtils {
 	/**
 	 * 获取当月最后一天的时间
 	 * 
-	 * @param dateTime
-	 * @return
-	 * @throws ConsumerLogException
+	 * @param dateTime 时间
+	 * @return Date
+	 * @throws Exception 转换异常
 	 */
 	public static Date getBarLastDayTime(Date dateTime) throws Exception {
 
-		return parseBarDateTime(new SimpleDateFormat("yyyy-MM-dd").format(getLastDayOfMonth(dateTime)).concat(LAST_TIME_DAY));
+		return parseBarDateTime(
+				new SimpleDateFormat("yyyy-MM-dd").format(getLastDayOfMonth(dateTime)).concat(LAST_TIME_DAY));
 	}
 
 	/**
 	 * 获取当月最后一天
 	 * 
-	 * @param dateTime
-	 * @return
+	 * @param dateTime 时间
+	 * @return Date
 	 */
 	public static Date getLastDayOfMonth(Date dateTime) {
 		Calendar g = Calendar.getInstance();
@@ -144,9 +144,9 @@ public class DateUtils {
 	/**
 	 * 获取增加月的日期
 	 * 
-	 * @param date
-	 * @param number
-	 * @return
+	 * @param dateTime 时间
+	 * @param number   月
+	 * @return Date
 	 */
 	public static Date addMonthDate(Date dateTime, Integer number) {
 		Calendar g = Calendar.getInstance();

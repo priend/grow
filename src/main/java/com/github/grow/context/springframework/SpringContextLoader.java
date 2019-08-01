@@ -5,9 +5,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  *
- * @file SpringContextLoader.java
  * @author CMCC.HPE.Pactera.Zh
- * @dateTime 2018年4月4日 下午5:16:14
  */
 public class SpringContextLoader {
 
@@ -18,21 +16,21 @@ public class SpringContextLoader {
 	}
 
 	/**
-	 * @param path
+	 * @param path 路径
 	 */
 	public void initClassPathXmlApplicationContext(String... path) {
 		initApplicationContext = new ClassPathXmlApplicationContext(path);
 	}
 
 	/**
-	 * @return
+	 * @return ApplicationContext
 	 */
 	public ApplicationContext getInitApplicationContext() {
 		return initApplicationContext;
 	}
 
 	/**
-	 * @param initApplicationContext
+	 * @param initApplicationContext 实体上下文
 	 */
 	public void setInitApplicationContext(ApplicationContext initApplicationContext) {
 		this.initApplicationContext = initApplicationContext;

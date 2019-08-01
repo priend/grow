@@ -11,28 +11,24 @@ public class ConnectionDispersed {
 
 	private static JdbcDynamic JDBC_CONFIG = JdbcDynamic.getInstance();
 
-	static
-	{
-		try
-		{
+	static {
+		try {
 			Class.forName(JDBC_CONFIG.getDriver());
-		}
-		catch (ClassNotFoundException e)
-		{
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
 
 	/**
-	 * @return
+	 * @return ConnectionDispersed
 	 */
 	public static ConnectionDispersed getInstance() {
 		return INSTANCE;
 	}
 
 	/**
-	 * @return
-	 * @throws SQLException
+	 * @return Connection
+	 * @throws SQLException 数据库异常
 	 */
 	public Connection getConnection() throws SQLException {
 
@@ -40,41 +36,36 @@ public class ConnectionDispersed {
 	}
 
 	/**
-	 * @return
-	 * @throws SQLException
+	 * @return boolean
+	 * @throws SQLException 数据库异常
 	 */
 	public boolean isConnection() throws SQLException {
 
-		if (null == CONNECTION_HOLDER.get() || CONNECTION_HOLDER.get().isClosed())
-		{
+		if (null == CONNECTION_HOLDER.get() || CONNECTION_HOLDER.get().isClosed()) {
 			return false;
-		}
-		else
-		{
+		} else {
 			return true;
 		}
 	}
 
 	/**
-	 * @return
-	 * @throws SQLException
+	 * @return Connection
+	 * @throws SQLException 数据库异常
 	 */
 	public Connection getConn() throws SQLException {
 
-		if (!isConnection())
-		{
+		if (!isConnection()) {
 			CONNECTION_HOLDER.set(this.getConnection());
 		}
 		return CONNECTION_HOLDER.get();
 	}
 
 	/**
-	 * @throws SQLException
+	 * @throws SQLException 数据库异常
 	 */
 	public void close() throws SQLException {
 
-		if (!isConnection())
-		{
+		if (!isConnection()) {
 			return;
 		}
 		CONNECTION_HOLDER.get().close();
@@ -82,12 +73,11 @@ public class ConnectionDispersed {
 	}
 
 	/**
-	 * @throws SQLException
+	 * @throws SQLException 数据库异常
 	 */
 	public void commit() throws SQLException {
 
-		if (!isConnection())
-		{
+		if (!isConnection()) {
 			return;
 		}
 
@@ -95,12 +85,11 @@ public class ConnectionDispersed {
 	}
 
 	/**
-	 * @throws SQLException
+	 * @throws SQLException 数据库异常
 	 */
 	public void rollback() throws SQLException {
 
-		if (!isConnection())
-		{
+		if (!isConnection()) {
 			return;
 		}
 

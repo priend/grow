@@ -6,8 +6,6 @@ import java.util.Map;
 /**
  * JDBC配置
  *
- * @file JDBCConfiguration.java
- * @dateTime 2017年7月19日 下午5:16:23
  */
 public class JdbcDynamic {
 
@@ -19,25 +17,25 @@ public class JdbcDynamic {
 	private Map<String, JdbcDynamic> dataSources = new HashMap<String, JdbcDynamic>();
 	private static final JdbcDynamic instance = new JdbcDynamic();
 
-	private JdbcDynamic()
-	{
+	private JdbcDynamic() {
 	}
 
 	/**
-	 * @return
+	 * @return JdbcDynamic
 	 */
 	public static JdbcDynamic getInstance() {
 		return instance;
 	}
 
 	/**
-	 * @param sourceName
-	 * @param driver
-	 * @param url
-	 * @param username
-	 * @param password
+	 * @param sourceName 数据源名称
+	 * @param driver     驱动
+	 * @param url        链接字符串
+	 * @param username   用户名
+	 * @param password   密码
 	 */
-	public void addDataSource(String sourceName, final String driver, final String url, final String username, final String password) {
+	public void addDataSource(String sourceName, final String driver, final String url, final String username,
+			final String password) {
 
 		JdbcDynamic jdbcDynamic = new JdbcDynamic();
 		jdbcDynamic.setDriver(driver);
@@ -48,13 +46,12 @@ public class JdbcDynamic {
 	}
 
 	/**
-	 * @param sourceName
+	 * @param sourceName 数据源名称
 	 */
 	public void initDataSource(String sourceName) {
 
 		JdbcDynamic jdbcDynamic = dataSources.get(sourceName);
-		if (null != jdbcDynamic)
-		{
+		if (null != jdbcDynamic) {
 			this.setDriver(jdbcDynamic.getDriver());
 			this.setUrl(jdbcDynamic.getUrl());
 			this.setUsername(jdbcDynamic.getUsername());

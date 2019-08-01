@@ -6,11 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
- *
- * @file ProxyExecuteTransaction.java
  * @author rocfly.zhang
- * @dateTime 2017年10月30日 下午5:08:28
  */
 public class ProxyTransaction {
 
@@ -24,7 +20,7 @@ public class ProxyTransaction {
 	}
 
 	/**
-	 * @throws SQLException
+	 * @throws SQLException 数据库异常
 	 */
 	private void openConnection() throws SQLException {
 
@@ -36,7 +32,7 @@ public class ProxyTransaction {
 	}
 
 	/**
-	 * @param level
+	 * @param level 事务等级
 	 */
 	public void setLevel(Integer level) {
 
@@ -44,9 +40,10 @@ public class ProxyTransaction {
 	}
 
 	/**
-	 * @param target
-	 * @return
-	 * @throws SQLException
+	 * @param <T>    泛化类
+	 * @param target 执行对象
+	 * @return ExecuteCall
+	 * @throws SQLException 执行sql 异常
 	 */
 	public <T extends ExecuteCall> T getProxyInstance(final T target) throws SQLException {
 
